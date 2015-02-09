@@ -6,7 +6,7 @@
 Noire is an [Imgur][imgur] desktop client.
 
 [imgur]:https://imgur.com
-[travisci]:https://travis-ci.org/supranove/qtstereoscopy
+[travisci]:https://travis-ci.org/supranove/noire
 [travisci_badge]:https://travis-ci.org/supranove/noire.svg?branch
 [droneio]:https://drone.io/github.com/supranove/noire/latest
 [droneio_badge]:https://drone.io/github.com/supranove/noire/status.png
