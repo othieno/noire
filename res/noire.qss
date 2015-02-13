@@ -1,0 +1,21 @@
+*
+{
+    color:#FFF;
+    background:#222;
+}
+
+QPushButton
+{
+    width:32px;
+    height:32px;
+    border:none;
+}
+
+QPushButton#authorizeButton_ { border-image:url(":/icon/authorize-button"); }
+QPushButton#authorizeButton_:hover { border-image:url(":/icon/authorize-button-hover") }
+
+QPushButton#logoutButton_ { border-image:url(":/icon/logout-button"); }
+QPushButton#logoutButton_:hover { border-image:url(":/icon/logout-button-hover") }
+
+QPushButton#menuButton_ { border-image:url(":/icon/menu-button"); }
+QPushButton#menuButton_:hover { border-image:url(":/icon/menu-button-hover") }

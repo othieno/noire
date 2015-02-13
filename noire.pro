@@ -20,38 +20,61 @@ TARGET = noire
 INCLUDEPATH += \
     src \
     src/logic \
+    src/logic/api \
     src/logic/models \
     src/presentation
 
 HEADERS += \
-    src/imgurapi.hh \
     src/presentation/window.hh \
     src/logic/models/imguraccount.hh \
     src/logic/models/imguraccountsettings.hh \
     src/logic/models/imguralbum.hh \
     src/sessionmanager.hh \
     src/settings.hh \
-    src/logic/models/imgurjsonresponse.hh \
     src/logic/session.hh \
-    src/application.hh
+    src/application.hh \
+    src/logic/models/imgurresponse.hh \
+    src/logic/models/imgurbasicresponse.hh \
+    src/logic/api/imgurapi.hh \
+    src/logic/api/imguraccountapi.hh \
+    src/logic/api/imgurapiendpoint.hh \
+    src/logic/api/imguralbumapi.hh \
+    src/logic/api/imgurcustomgalleryapi.hh \
+    src/logic/api/imgurgalleryapi.hh \
+    src/logic/api/imgurimageapi.hh \
+    src/logic/api/imgurmemegenapi.hh \
+    src/logic/api/imgurnotificationapi.hh \
+    src/logic/api/imgurcommentapi.hh \
+    src/logic/api/imgurconversationapi.hh \
+    src/logic/api/imgurauthorizationapi.hh
 
 SOURCES += \
-    src/imgurapi.cpp \
     src/presentation/window.cpp \
     src/sessionmanager.cpp \
     src/settings.cpp \
-    src/logic/models/imgurjsonresponse.cpp \
     src/logic/session.cpp \
     src/application.cpp \
-    src/noire.cpp
+    src/noire.cpp \
+    src/logic/models/imgurresponse.cpp \
+    src/logic/models/imgurbasicresponse.cpp \
+    src/logic/models/imguraccount.cpp \
+    src/logic/api/imgurapi.cpp \
+    src/logic/api/imguraccountapi.cpp \
+    src/logic/api/imgurapiendpoint.cpp \
+    src/logic/api/imguralbumapi.cpp \
+    src/logic/api/imgurauthorizationapi.cpp \
+    src/logic/api/imgurcommentapi.cpp \
+    src/logic/api/imgurconversationapi.cpp \
+    src/logic/api/imgurcustomgalleryapi.cpp \
+    src/logic/api/imgurgalleryapi.cpp \
+    src/logic/api/imgurimageapi.cpp \
+    src/logic/api/imgurmemegenapi.cpp \
+    src/logic/api/imgurnotificationapi.cpp
 
 FORMS += \
     src/presentation/forms/window.ui
 
 RESOURCES += \
     res/res.qrc
-
-OTHER_FILES += \
-    Makefile
 
 include(noire.pri)

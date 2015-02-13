@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file alias="menu-button">material-design-icons/image/ic_dehaze_grey600_18dp.png</file>
+        <file alias="menu-button-hover">material-design-icons/image/ic_dehaze_white_18dp.png</file>
+        <file alias="authorize-button">material-design-icons/action/ic_account_box_grey600_18dp.png</file>
+        <file alias="authorize-button-hover">material-design-icons/action/ic_account_box_white_18dp.png</file>
+        <file alias="logout-button">material-design-icons/action/ic_exit_to_app_grey600_18dp.png</file>
+        <file alias="logout-button-hover">material-design-icons/action/ic_exit_to_app_white_18dp.png</file>
+    </qresource>
+    <qresource prefix="/credentials">
+        <file alias="client_secret">client_secret.txt</file>
+    </qresource>
+    <qresource prefix="/qss">
+        <file alias="noire">noire.qss</file>
+    </qresource>
+</RCC>
