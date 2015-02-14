@@ -23,7 +23,7 @@ using noire::ImgurImageApi;
  * \brief Instantiates an ImgurImageApi object.
  */
 ImgurImageApi::ImgurImageApi() :
-ImgurApiEndpoint(apiBaseURL().append("image"))
+ImgurApiEndpoint("image")
 {}
 #ifdef FIXME
 /*!

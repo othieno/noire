@@ -23,7 +23,7 @@ using noire::ImgurNotificationApi;
  * \brief Instantiates an ImgurNotificationApi object.
  */
 ImgurNotificationApi::ImgurNotificationApi() :
-ImgurApiEndpoint(apiBaseURL().append("notification"))
+ImgurApiEndpoint("notification")
 {}
 
 

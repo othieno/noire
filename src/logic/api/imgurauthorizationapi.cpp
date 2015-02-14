@@ -25,7 +25,7 @@ using noire::ImgurAuthorizationApi;
  * \brief Instantiates an ImgurAuthorizationApi object with the client \a identifier.
  */
 ImgurAuthorizationApi::ImgurAuthorizationApi(const QString& identifier) :
-ImgurApiEndpoint(oAuthBaseURL()),
+ImgurApiEndpoint(QString(), ImgurApiEndpoint::API_OAUTH_BASE_URL),
 clientId_(identifier),
 authorizationHeader_(QString("Client-ID %1").arg(clientId_).toUtf8())
 {}

@@ -23,5 +23,5 @@ using noire::ImgurGalleryApi;
  * \brief Instantiates an ImgurGalleryApi object.
  */
 ImgurGalleryApi::ImgurGalleryApi() :
-ImgurApiEndpoint(apiBaseURL().append("gallery")) //TODO Find out if 'gallery' can be shortened to 'g'.
+ImgurApiEndpoint("gallery") //TODO Find out if 'gallery' can be shortened to 'g'.
 {}

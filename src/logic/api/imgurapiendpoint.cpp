@@ -25,10 +25,11 @@ using noire::ImgurApiEndpoint;
 QNetworkAccessManager* ImgurApiEndpoint::networkAccessManager_ = nullptr;
 
 /*!
- * \brief Instantiates an ImgurAccountApi object with the specified base \a URL.
+ * TODO Explain the parameters better.
+ * \brief Instantiates an ImgurApiEndpoint object with the specified base \a path and base \a URL.
  */
-ImgurApiEndpoint::ImgurApiEndpoint(const QString& URL) :
-baseURL_(URL)
+ImgurApiEndpoint::ImgurApiEndpoint(const QString& path, const QString& URL) :
+baseURL_(path.isEmpty() ? URL : QString("%1/%2").arg(URL, path))
 {}
 /*!
  * \brief Makes an HTTP GET request to the specified \a path.

@@ -23,7 +23,7 @@ using noire::ImgurAlbumApi;
  * \brief Instantiates an ImgurAlbumApi object.
  */
 ImgurAlbumApi::ImgurAlbumApi() :
-ImgurApiEndpoint(apiBaseURL().append("album"))
+ImgurApiEndpoint("album")
 {}
 #ifdef FIXME
 QNetworkReply*

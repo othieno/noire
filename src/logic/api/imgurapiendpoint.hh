@@ -49,24 +49,31 @@ class ImgurVote;
 class ImgurApiEndpoint
 {
     friend class ImgurApi;
+public:
     /*!
      * \brief Returns the API endpoint's base URL.
      */
     inline const QString& baseURL() const { return baseURL_; }
 protected:
-    explicit ImgurApiEndpoint(const QString& baseUrl);
+    ImgurApiEndpoint(const QString& endpointBasePath, const QString& endpointBaseURL = API_BASE_URL);
 
     QNetworkReply* GET(const QString& path);
-    QNetworkReply* POST(const QString& path, const QByteArray& parameters);
+    QNetworkReply* GET(const QString& path, const QUrlQuery& query);
+
+    QNetworkReply* POST(const QString& path, const QUrlQuery& query);
+    QNetworkReply* POST(const QString& path, const QUrlQuery& query, const QByteArray& data);
+    QNetworkReply* POST(const QString& path, const QByteArray& data);
+
     QNetworkReply* DELETE(const QString& path);
+    QNetworkReply* DELETE(const QString& path, const QUrlQuery& query);
     /*!
-     * \brief Returns the Imgur API's base URL.
+     * \brief The Imgur API's base URL.
      */
-    inline static QString apiBaseURL(){ return "https://api.imgur.com/3"; }
+    constexpr static const char* const API_BASE_URL = "https://api.imgur.com/3";
     /*!
-     * \brief Returns the Imgur API's OAuth base URL.
+     * \brief The Imgur API's OAuth base URL.
      */
-    inline static QString oAuthBaseURL() { return "https://api.imgur.com/oauth2"; }
+    constexpr static const char* const API_OAUTH_BASE_URL = "https://api.imgur.com/oauth2";
 private:
     QNetworkRequest createApiRequest(const QString& path) const;
     /*!

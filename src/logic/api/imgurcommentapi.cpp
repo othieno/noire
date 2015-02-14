@@ -23,5 +23,5 @@ using noire::ImgurCommentApi;
  * \brief Instantiates an ImgurCommentApi object.
  */
 ImgurCommentApi::ImgurCommentApi() :
-ImgurApiEndpoint(apiBaseURL().append("comment"))
+ImgurApiEndpoint("comment")
 {}

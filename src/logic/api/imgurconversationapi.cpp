@@ -23,5 +23,5 @@ using noire::ImgurConversationApi;
  * \brief Instantiates an ImgurConversationApi object.
  */
 ImgurConversationApi::ImgurConversationApi() :
-ImgurApiEndpoint(apiBaseURL().append("conversations"))
+ImgurApiEndpoint("conversations")
 {}

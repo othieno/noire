@@ -23,5 +23,5 @@ using noire::ImgurCustomGalleryApi;
  * \brief Instantiates an ImgurCustomGalleryApi object.
  */
 ImgurCustomGalleryApi::ImgurCustomGalleryApi() :
-ImgurApiEndpoint(apiBaseURL().append("g"))
+ImgurApiEndpoint("g")
 {}

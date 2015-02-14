@@ -23,7 +23,7 @@ using noire::ImgurAccountApi;
  * \brief Instantiates an ImgurAccountApi object.
  */
 ImgurAccountApi::ImgurAccountApi() :
-ImgurApiEndpoint(apiBaseURL().append("account"))
+ImgurApiEndpoint("account")
 {}
 /*!
  * \brief Requests information for the account with the specified \a username.

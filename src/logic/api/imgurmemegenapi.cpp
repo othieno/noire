@@ -23,5 +23,5 @@ using noire::ImgurMemegenApi;
  * \brief Instantiates an ImgurMemegenApi object.
  */
 ImgurMemegenApi::ImgurMemegenApi() :
-ImgurApiEndpoint(apiBaseURL().append("memegen"))
+ImgurApiEndpoint("memegen")
 {}
