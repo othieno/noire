@@ -26,7 +26,7 @@ class ImgurMemegenApi final : public ImgurApiEndpoint
 {
     friend class ImgurApi;
 public:
-    QNetworkReply* defaultMemes();
+    ImgurApiGET defaultMemes();
 private:
     ImgurMemegenApi();
 };

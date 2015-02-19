@@ -26,10 +26,10 @@ class ImgurNotificationApi final : public ImgurApiEndpoint
 {
     friend class ImgurApi;
 public:
-    QNetworkReply* notification(const QString& notificationId);
-    QNetworkReply* notifications(const bool getViewedNotifications = false);
-    QNetworkReply* setNotificationViewed(const QString& notificationId);
-    QNetworkReply* setNotificationViewed(const QStringList& notificationIds);
+    ImgurApiGET  notification(const QString& notificationId);
+    ImgurApiGET  notifications(const bool getViewedNotifications = false);
+    ImgurApiPOST setNotificationViewed(const QString& notificationId);
+    ImgurApiPOST setNotificationViewed(const QStringList& notificationIds);
 private:
     ImgurNotificationApi();
 };

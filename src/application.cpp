@@ -29,13 +29,12 @@ using noire::Application;
 Application::Application(int& argc, char** argv) :
 QApplication(argc, argv),
 settings_(QString("%1/configuration.ini").arg(dataLocation())),
-sessionManager_(settings_),
+sessionManager_(settings_, networkAccessManager_),
 window_(settings_, sessionManager_)
 {
     connect(this, &Application::authenticated, this, &Application::onAuthenticated);
     connect(this, &Application::aboutToQuit, this, &Application::onAboutToQuit);
 
-    ImgurApi::setNetworkAccessManager(networkAccessManager_);
     setApplicationStyle();
 }
 /*!

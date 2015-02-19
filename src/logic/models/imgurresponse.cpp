@@ -44,14 +44,15 @@ ImgurResponse::error(const QJsonObject& object, const bool showHttpStatus)
 {
     QString message;
 
-    if (ImgurResponse::isJsonObjectConvertible(object))
+    if (!ImgurResponse::isJsonObjectConvertible(object))
         message = "Incompatible JSON object.";
     else
     {
         const ImgurResponse response(object);
-        if (!response.success && object.contains("error"))
+        const auto& data = object["data"].toObject();
+        if (!response.success && data.contains("error"))
         {
-            message = object["error"].toString().append(".");
+            message = data["error"].toString().append(".");
             if (showHttpStatus)
                 message = QString("(HTTP Status: %1) %2").arg(QString::number(response.status), message);
         }

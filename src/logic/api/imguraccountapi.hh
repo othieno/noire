@@ -40,42 +40,42 @@ public:
         Newest
     };
 
-    QNetworkReply* account(const QString& username);
-    QNetworkReply* galleryFavorites(const QString& username);
-    QNetworkReply* galleryFavorites(const QString& username, const int page, const bool getNewestFirst = true);
-    QNetworkReply* favorites(const QString& username);
-    QNetworkReply* submissions(const QString& username);
-    QNetworkReply* submissions(const QString& username, const int page);
-    QNetworkReply* settings(const QString& username);
-    QNetworkReply* changeSettings(const QString& username, const ImgurAccountSettings& settings);
-    QNetworkReply* galleryProfile(const QString& username);
-    QNetworkReply* verifyEmail(const QString& username);
-    QNetworkReply* sendVerificationEmail(const QString& username);
+    ImgurApiGET    account(const QString& username);
+    ImgurApiGET    galleryFavorites(const QString& username);
+    ImgurApiGET    galleryFavorites(const QString& username, const int page, const bool getNewestFirst = true);
+    ImgurApiGET    favorites(const QString& username);
+    ImgurApiGET    submissions(const QString& username);
+    ImgurApiGET    submissions(const QString& username, const int page);
+    ImgurApiGET    settings(const QString& username);
+    ImgurApiPOST   setSettings(const QString& username, const ImgurAccountSettings& settings);
+    ImgurApiGET    galleryProfile(const QString& username);
+    ImgurApiGET    verifyEmail(const QString& username);
+    ImgurApiPOST   sendVerificationEmail(const QString& username);
 
-    QNetworkReply* albums(const QString& username);
-    QNetworkReply* albums(const QString& username, const int page);
-    QNetworkReply* album(const QString& username, const QString& albumId);
-    QNetworkReply* albumIds(const QString& username);
-    QNetworkReply* albumIds(const QString& username, const int page);
-    QNetworkReply* albumCount(const QString& username);
-    QNetworkReply* deleteAlbum(const QString& username, const QString& albumId);
+    ImgurApiGET    albums(const QString& username);
+    ImgurApiGET    albums(const QString& username, const int page);
+    ImgurApiGET    album(const QString& username, const QString& albumId);
+    ImgurApiGET    albumIds(const QString& username);
+    ImgurApiGET    albumIds(const QString& username, const int page);
+    ImgurApiGET    albumCount(const QString& username);
+    ImgurApiDELETE deleteAlbum(const QString& username, const QString& albumId);
 
-    QNetworkReply* comments(const QString& username, const Sorting& sorting = Sorting::Newest, const int page = 0);
-    QNetworkReply* comment(const QString& username, const QString& commentId);
-    QNetworkReply* commentIds(const QString& username, const Sorting& sorting = Sorting::Newest, const int page = 0);
-    QNetworkReply* commentCount(const QString& username);
+    ImgurApiGET    comments(const QString& username, const Sorting& sorting = Sorting::Newest, const int page = 0);
+    ImgurApiGET    comment(const QString& username, const QString& commentId);
+    ImgurApiGET    commentIds(const QString& username, const Sorting& sorting = Sorting::Newest, const int page = 0);
+    ImgurApiGET    commentCount(const QString& username);
     inline int     commentCountPerPage() const { return 50; } // The Imgur API returns 50 comments per page.
-    QNetworkReply* deleteComment(const QString& username, const QString& commentId);
+    ImgurApiDELETE deleteComment(const QString& username, const QString& commentId);
 
-    QNetworkReply* images(const QString& username);
-    QNetworkReply* images(const QString& username, const int page);
-    QNetworkReply* image(const QString& username, const QString& imageId);
-    QNetworkReply* imageIds(const QString& username);
-    QNetworkReply* imageIds(const QString& username, const int page);
-    QNetworkReply* imageCount(const QString& username);
-    QNetworkReply* deleteImage(const QString& username, const QString& deleteHash);
+    ImgurApiGET    images(const QString& username);
+    ImgurApiGET    images(const QString& username, const int page);
+    ImgurApiGET    image(const QString& username, const QString& imageId);
+    ImgurApiGET    imageIds(const QString& username);
+    ImgurApiGET    imageIds(const QString& username, const int page);
+    ImgurApiGET    imageCount(const QString& username);
+    ImgurApiDELETE deleteImage(const QString& username, const QString& deleteHash);
 
-    QNetworkReply* replies(const QString& username, const bool getViewedReplies = false);
+    ImgurApiGET    replies(const QString& username, const bool getViewedReplies = false);
 private:
     ImgurAccountApi();
 };

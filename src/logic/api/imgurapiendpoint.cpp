@@ -16,70 +16,108 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 #include "imgurapiendpoint.hh"
-#include "imgurapi.hh"
 #include <QNetworkAccessManager>
+#include <QUrlQuery>
 
 using noire::ImgurApiEndpoint;
-
-// This value is assigned in the noire::Application constructor.
-QNetworkAccessManager* ImgurApiEndpoint::networkAccessManager_ = nullptr;
+using noire::ImgurApiGET;
+using noire::ImgurApiPUT;
+using noire::ImgurApiPOST;
+using noire::ImgurApiDELETE;
 
 /*!
- * TODO Explain the parameters better.
  * \brief Instantiates an ImgurApiEndpoint object with the specified base \a path and base \a URL.
  */
 ImgurApiEndpoint::ImgurApiEndpoint(const QString& path, const QString& URL) :
-baseURL_(path.isEmpty() ? URL : QString("%1/%2").arg(URL, path))
+baseURL(path.isEmpty() ? URL : QString("%1/%2").arg(URL, path))
 {}
 /*!
- * \brief Makes an HTTP GET request to the specified \a path.
+ * \brief Creates an HTTP GET request to the specified \a path.
  */
-QNetworkReply*
+ImgurApiGET
 ImgurApiEndpoint::GET(const QString& path)
 {
-    QNetworkReply* reply = nullptr;
-    if (!path.isEmpty() && networkAccessManager_ != nullptr)
-        reply = networkAccessManager_->get(createApiRequest(path));
-
-    return reply;
+    return ImgurApiGET(QUrl(QString("%1/%2").arg(baseURL, path)));
 }
 /*!
- * \brief Makes an HTTP POST request to the specified \a path.
- * Additional \a parameters may be appended to the request.
+ * \brief Creates an HTTP GET request to the specified \a path.
+ * Additional \a query parameters may be appended.
  */
-QNetworkReply*
-ImgurApiEndpoint::POST(const QString& path, const QByteArray& parameters)
+ImgurApiGET
+ImgurApiEndpoint::GET(const QString& path, const QUrlQuery& query)
 {
-    QNetworkReply* reply = nullptr;
-    if (!path.isEmpty() && networkAccessManager_ != nullptr)
-    {
-        auto request = createApiRequest(path);
-        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+    QUrl url(QString("%1/%2").arg(baseURL, path));
+    url.setQuery(query);
 
-        reply = networkAccessManager_->post(request, parameters);
-    }
-    return reply;
+    return ImgurApiGET(url);
+}
+/*!
+ * \brief Creates an HTTP PUT request to the specified \a path.
+ */
+ImgurApiPUT
+ImgurApiEndpoint::PUT(const QString& path)
+{
+    return PUT(path, QByteArray());
+}
+/*!
+ * \brief Creates an HTTP PUT request to the specified \a path.
+ * Additional \a query parameters may be appended.
+ */
+ImgurApiPUT
+ImgurApiEndpoint::PUT(const QString& path, const QUrlQuery& query)
+{
+    return PUT(path, query.toString(QUrl::FullyEncoded).toUtf8());
+}
+/*!
+ * \brief Creates an HTTP PUT request to the specified \a path, with the \a data to send.
+ */
+ImgurApiPUT
+ImgurApiEndpoint::PUT(const QString& path, const QByteArray& data)
+{
+    return ImgurApiPUT(QUrl(QString("%1/%2").arg(baseURL, path)), data);
+}
+/*!
+ * \brief Creates an HTTP POST request to the specified \a path.
+ */
+ImgurApiPOST
+ImgurApiEndpoint::POST(const QString& path)
+{
+    return POST(path, QByteArray());
+}
+/*!
+ * \brief Creates an HTTP POST request to the specified \a path.
+ * Additional \a query parameters may be appended.
+ */
+ImgurApiPOST
+ImgurApiEndpoint::POST(const QString& path, const QUrlQuery& query)
+{
+    return POST(path, query.toString(QUrl::FullyEncoded).toUtf8());
+}
+/*!
+ * \brief Creates an HTTP POST request to the specified \a path, with the \a data to send.
+ */
+ImgurApiPOST
+ImgurApiEndpoint::POST(const QString& path, const QByteArray& data)
+{
+    return ImgurApiPOST(QUrl(QString("%1/%2").arg(baseURL, path)), data);
 }
 /*!
  * \brief Makes an HTTP DELETE request to the specified \a path.
  */
-QNetworkReply*
+ImgurApiDELETE
 ImgurApiEndpoint::DELETE(const QString& path)
 {
-    QNetworkReply* reply = nullptr;
-    if (!path.isEmpty() && networkAccessManager_ != nullptr)
-        reply = networkAccessManager_->deleteResource(createApiRequest(path));
-
-    return reply;
+    return ImgurApiDELETE(QUrl(QString("%1/%2").arg(baseURL, path)));
 }
 /*!
- * \brief Constructs a correctly-formed HTTP request to the specified \a path.
+ * \brief Makes an HTTP DELETE request to the specified \a path.
+ * Additional \a query parameters may be appended to the request.
  */
-QNetworkRequest
-ImgurApiEndpoint::createApiRequest(const QString& path) const
+ImgurApiDELETE
+ImgurApiEndpoint::DELETE(const QString& path, const QUrlQuery& query)
 {
-    QNetworkRequest request(QUrl(QString("%1/%2").arg(baseURL_, path)));
-    request.setRawHeader("Authorization", ImgurApi::Authorization.header());
+    QUrl url(QString("%1/%2").arg(baseURL, path));
+    url.setQuery(query);
 
-    return request;
+    return ImgurApiDELETE(url);
 }

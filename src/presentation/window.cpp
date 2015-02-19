@@ -70,6 +70,6 @@ Window::onSessionChanged(const Session& session)
 void
 Window::onAuthorizationFailed(const QString& errorMessage)
 {
-    Q_UNUSED(errorMessage);
+    qDebug() << errorMessage;
     qCritical("[Window::onAuthorizationFailed] CRITICAL: Unimplemented member function.");
 }

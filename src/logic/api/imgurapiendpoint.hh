@@ -18,11 +18,7 @@
 #ifndef IMGURAPIENDPOINT_HH
 #define IMGURAPIENDPOINT_HH
 
-#include <QString>
-#include <QNetworkRequest>
-
-class QNetworkAccessManager;
-class QNetworkReply;
+#include "imgurapirequest.hh"
 
 namespace noire {
 
@@ -48,24 +44,11 @@ class ImgurVote;
 
 class ImgurApiEndpoint
 {
-    friend class ImgurApi;
 public:
     /*!
-     * \brief Returns the API endpoint's base URL.
+     * \brief The endpoint's base URL.
      */
-    inline const QString& baseURL() const { return baseURL_; }
-protected:
-    ImgurApiEndpoint(const QString& endpointBasePath, const QString& endpointBaseURL = API_BASE_URL);
-
-    QNetworkReply* GET(const QString& path);
-    QNetworkReply* GET(const QString& path, const QUrlQuery& query);
-
-    QNetworkReply* POST(const QString& path, const QUrlQuery& query);
-    QNetworkReply* POST(const QString& path, const QUrlQuery& query, const QByteArray& data);
-    QNetworkReply* POST(const QString& path, const QByteArray& data);
-
-    QNetworkReply* DELETE(const QString& path);
-    QNetworkReply* DELETE(const QString& path, const QUrlQuery& query);
+    const QString baseURL;
     /*!
      * \brief The Imgur API's base URL.
      */
@@ -74,16 +57,22 @@ protected:
      * \brief The Imgur API's OAuth base URL.
      */
     constexpr static const char* const API_OAUTH_BASE_URL = "https://api.imgur.com/oauth2";
-private:
-    QNetworkRequest createApiRequest(const QString& path) const;
-    /*!
-     * \brief The endpoint's base URL.
-     */
-    const QString baseURL_;
-    /*!
-     * \brief The network access manager.
-     */
-    static QNetworkAccessManager* networkAccessManager_;
+protected:
+    ImgurApiEndpoint(const QString& basePath, const QString& baseURL = API_BASE_URL);
+
+    ImgurApiGET GET(const QString& path);
+    ImgurApiGET GET(const QString& path, const QUrlQuery& query);
+
+    ImgurApiPUT PUT(const QString& path);
+    ImgurApiPUT PUT(const QString& path, const QUrlQuery& query);
+    ImgurApiPUT PUT(const QString& path, const QByteArray& data);
+
+    ImgurApiPOST POST(const QString& path);
+    ImgurApiPOST POST(const QString& path, const QUrlQuery& query);
+    ImgurApiPOST POST(const QString& path, const QByteArray& data);
+
+    ImgurApiDELETE DELETE(const QString& path);
+    ImgurApiDELETE DELETE(const QString& path, const QUrlQuery& query);
 };
 
 } // namespace noire

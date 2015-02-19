@@ -31,7 +31,7 @@ struct TestSuite : public QObject
     int run(int& argc, char** argv)
     {
         int status = 0;
-        for (Test* const t : {(new Tests(*this))...})
+        for (auto* const t : std::initializer_list<Test*>({(new Tests(*this))...}))
         {
             status |= QTest::qExec(t, argc, argv);
             delete t;

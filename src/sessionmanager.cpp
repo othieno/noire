@@ -26,10 +26,11 @@
 using noire::SessionManager;
 
 /*!
- * \brief Instantiates a SessionManager object that references the application \a settings.
+ * \brief Instantiates a SessionManager object that references the application \a settings and network access \a manager.
  */
-SessionManager::SessionManager(Settings& settings) :
-settings_(settings)
+SessionManager::SessionManager(Settings& settings, QNetworkAccessManager& manager) :
+settings_(settings),
+networkAccessManager_(manager)
 {}
 /*!
  * \brief Sets a new \a session.
@@ -50,7 +51,7 @@ SessionManager::setSession(const Session& session)
 void
 SessionManager::authorizePIN(const QString& PIN)
 {
-    auto* const reply = ImgurApi::Authorization.authorizePIN(PIN);
+    auto* const reply = ImgurApi::Authorization.authorizePIN(PIN)(networkAccessManager_);
     if (reply != nullptr)
         onHandleAuthorizationReply(*reply);
 }
@@ -60,7 +61,7 @@ SessionManager::authorizePIN(const QString& PIN)
 void
 SessionManager::authorizeRefreshToken(const QString& token)
 {
-    auto* const reply = ImgurApi::Authorization.authorizeRefreshToken(token);
+    auto* const reply = ImgurApi::Authorization.authorizeRefreshToken(token)(networkAccessManager_);
     if (reply != nullptr)
         onHandleAuthorizationReply(*reply);
 }

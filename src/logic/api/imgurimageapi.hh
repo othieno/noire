@@ -26,12 +26,12 @@ class ImgurImageApi final : public ImgurApiEndpoint
 {
     friend class ImgurApi;
 public:
-    QNetworkReply* image(const QString& imageId);
-    QNetworkReply* uploadImageFile(const QString& filename, const QString& albumId = QString(), const QString& title = QString(), const QString& description = QString());
-    QNetworkReply* uploadImageURL(const QString& url, const QString& albumId = QString(), const QString& title = QString(), const QString& description = QString());
-    QNetworkReply* deleteImage(const QString& imageId);
-    QNetworkReply* updateImage(const QString& imageId, const QString& title = QString(), const QString& description = QString());
-    QNetworkReply* favorite(const QString& imageId);
+    ImgurApiGET    image(const QString& imageId);
+    ImgurApiPOST   uploadImageFile(const QString& filename, const QString& albumId = QString(), const QString& title = QString(), const QString& description = QString());
+    ImgurApiPOST   uploadImageURL(const QString& url, const QString& albumId = QString(), const QString& title = QString(), const QString& description = QString());
+    ImgurApiDELETE deleteImage(const QString& imageId);
+    ImgurApiPOST   updateImage(const QString& imageId, const QString& title = QString(), const QString& description = QString());
+    ImgurApiPOST   favorite(const QString& imageId);
 private:
     ImgurImageApi();
 };

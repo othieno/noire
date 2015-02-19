@@ -15,27 +15,24 @@
  * You should have received a copy of the GNU General Public License along with Noire.
  * If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef IMGURCONVERSATIONAPI_HH
-#define IMGURCONVERSATIONAPI_HH
+#ifndef TESTIMGURACCOUNTAPI_HH
+#define TESTIMGURACCOUNTAPI_HH
 
-#include "imgurapiendpoint.hh"
+#include "test.hh"
+#include <QNetworkAccessManager>
 
 namespace noire {
 
-class ImgurConversationApi final : public ImgurApiEndpoint
+class TestImgurAccountApi : public Test
 {
-    friend class ImgurApi;
+    Q_OBJECT
 public:
-    ImgurApiGET    conversation(const QString& conversationId, const int page = 1, const int offset = 0);
-    ImgurApiGET    conversations();
-    ImgurApiPOST   createMessage(const QString& recipientUsername, const QString& message);
-    ImgurApiDELETE deleteConversation(const QString& conversationId);
-    ImgurApiPOST   reportSender(const QString& username);
-    ImgurApiPOST   blockSender(const QString& username);
-private:
-    ImgurConversationApi();
+    explicit TestImgurAccountApi(TestSuite& suite);
+private slots:
+    void testRequestURLs_data();
+    void testRequestURLs();
 };
 
 } // namespace noire
 
-#endif // IMGURCONVERSATIONAPI_HH
+#endif // TESTIMGURACCOUNTAPI_HH

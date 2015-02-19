@@ -26,8 +26,8 @@ class ImgurAuthorizationApi final : public ImgurApiEndpoint
 {
     friend class ImgurApi;
 public:
-    QNetworkReply* authorizePIN(const QString& PIN);
-    QNetworkReply* authorizeRefreshToken(const QString& token);
+    ImgurApiPOST authorizePIN(const QString& PIN);
+    ImgurApiPOST authorizeRefreshToken(const QString& token);
 
     QString accessToken() const;
     void setAccessToken(const QString& accessToken);
@@ -54,10 +54,13 @@ public:
 private:
     explicit ImgurAuthorizationApi(const QString& clientId);
 
-    QNetworkReply* authorize(const QString& key, const QString& grantType);
+    ImgurApiPOST authorize(const QString& key, const QString& grantType);
 
     const QString clientId_;
     QString clientSecret_;
+    /*!
+     * \brief The authorization header used by all HTTP requests made to the Imgur API.
+     */
     QByteArray authorizationHeader_;
 };
 

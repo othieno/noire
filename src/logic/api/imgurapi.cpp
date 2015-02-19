@@ -16,10 +16,6 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 #include "imgurapi.hh"
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QUrlQuery>
-#include <QFile>
 
 using noire::ImgurApi;
 
@@ -33,11 +29,3 @@ noire::ImgurImageApi         ImgurApi::Image;
 noire::ImgurConversationApi  ImgurApi::Conversation;
 noire::ImgurNotificationApi  ImgurApi::Notification;
 noire::ImgurMemegenApi       ImgurApi::Memegen;
-/*!
- * \brief Sets the network access \a manager used by the API.
- */
-void
-ImgurApi::setNetworkAccessManager(QNetworkAccessManager& manager)
-{
-    ImgurApiEndpoint::networkAccessManager_ = &manager;
-}

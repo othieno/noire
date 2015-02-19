@@ -46,7 +46,8 @@ HEADERS += \
     src/logic/api/imgurnotificationapi.hh \
     src/logic/api/imgurcommentapi.hh \
     src/logic/api/imgurconversationapi.hh \
-    src/logic/api/imgurauthorizationapi.hh
+    src/logic/api/imgurauthorizationapi.hh \
+    src/logic/api/imgurapirequest.hh
 
 SOURCES += \
     src/presentation/window.cpp \
@@ -69,7 +70,8 @@ SOURCES += \
     src/logic/api/imgurgalleryapi.cpp \
     src/logic/api/imgurimageapi.cpp \
     src/logic/api/imgurmemegenapi.cpp \
-    src/logic/api/imgurnotificationapi.cpp
+    src/logic/api/imgurnotificationapi.cpp \
+    src/logic/api/imgurapirequest.cpp
 
 FORMS += \
     src/presentation/forms/window.ui

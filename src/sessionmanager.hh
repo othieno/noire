@@ -21,6 +21,7 @@
 #include <QObject>
 #include "session.hh"
 
+class QNetworkAccessManager;
 class QNetworkReply;
 
 namespace noire {
@@ -42,11 +43,12 @@ public slots:
     void authorizePIN(const QString& PIN);
     void authorizeRefreshToken(const QString& token);
 private:
-    SessionManager(Settings& settings);
+    SessionManager(Settings& settings, QNetworkAccessManager& networkAccessManager);
 
     void onHandleAuthorizationReply(QNetworkReply& reply);
 
     Settings& settings_;
+    QNetworkAccessManager& networkAccessManager_;
     Session session_;
 signals:
     void authorizationFailed(const QString& errorMessage);

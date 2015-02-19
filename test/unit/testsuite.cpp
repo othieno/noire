@@ -17,11 +17,12 @@
  */
 #include "testsuite.hh"
 #include "testimgurapi.hh"
+#include "testimguraccountapi.hh"
 
 using namespace noire;
 
 int main(int argc, char** argv)
 {
-    return TestSuite().run</*TestXYZ,*/
-                           TestImgurApi>(argc, argv);
+    return TestSuite().run<TestImgurApi,
+                           TestImgurAccountApi>(argc, argv);
 }

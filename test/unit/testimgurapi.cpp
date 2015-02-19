@@ -26,16 +26,17 @@ Test(suite)
 /*!
  * \brief Tests API endpoint base URLs.
  */
-void TestImgurApi::testEndpointBaseURLs()
+void
+TestImgurApi::testEndpointBaseURLs()
 {
-    QCOMPARE(ImgurApi::Authorization.baseURL(), QString("https://api.imgur.com/oauth2"));
-    QCOMPARE(ImgurApi::Account.baseURL(),       QString("https://api.imgur.com/3/account"));
-    QCOMPARE(ImgurApi::Album.baseURL(),         QString("https://api.imgur.com/3/album"));
-    QCOMPARE(ImgurApi::Comment.baseURL(),       QString("https://api.imgur.com/3/comment"));
-    QCOMPARE(ImgurApi::CustomGallery.baseURL(), QString("https://api.imgur.com/3/g"));
-    QCOMPARE(ImgurApi::Gallery.baseURL(),       QString("https://api.imgur.com/3/gallery"));
-    QCOMPARE(ImgurApi::Image.baseURL(),         QString("https://api.imgur.com/3/image"));
-    QCOMPARE(ImgurApi::Conversation.baseURL(),  QString("https://api.imgur.com/3/conversations"));
-    QCOMPARE(ImgurApi::Notification.baseURL(),  QString("https://api.imgur.com/3/notification"));
-    QCOMPARE(ImgurApi::Memegen.baseURL(),       QString("https://api.imgur.com/3/memegen"));
+    QCOMPARE(ImgurApi::Authorization.baseURL, QString("https://api.imgur.com/oauth2"));
+    QCOMPARE(ImgurApi::Account.baseURL,       QString("https://api.imgur.com/3/account"));
+    QCOMPARE(ImgurApi::Album.baseURL,         QString("https://api.imgur.com/3/album"));
+    QCOMPARE(ImgurApi::Comment.baseURL,       QString("https://api.imgur.com/3/comment"));
+    QCOMPARE(ImgurApi::CustomGallery.baseURL, QString("https://api.imgur.com/3/g"));
+    QCOMPARE(ImgurApi::Gallery.baseURL,       QString("https://api.imgur.com/3/gallery"));
+    QCOMPARE(ImgurApi::Image.baseURL,         QString("https://api.imgur.com/3/image"));
+    QCOMPARE(ImgurApi::Conversation.baseURL,  QString("https://api.imgur.com/3/conversations"));
+    QCOMPARE(ImgurApi::Notification.baseURL,  QString("https://api.imgur.com/3/notification"));
+    QCOMPARE(ImgurApi::Memegen.baseURL,       QString("https://api.imgur.com/3/memegen"));
 }

@@ -16,8 +16,11 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 #include "imguraccountapi.hh"
+#include <QUrlQuery>
 
 using noire::ImgurAccountApi;
+using noire::ImgurApiGET;
+using noire::ImgurApiPOST;
 
 /*!
  * \brief Instantiates an ImgurAccountApi object.
@@ -26,12 +29,115 @@ ImgurAccountApi::ImgurAccountApi() :
 ImgurApiEndpoint("account")
 {}
 /*!
- * \brief Requests information for the account with the specified \a username.
+ * TODO Explain me.
+ * \brief
  */
-QNetworkReply*
+ImgurApiGET
 ImgurAccountApi::account(const QString& username)
 {
-    Q_UNUSED(username);
-    return nullptr;
-//    return username.isEmpty() ? nullptr : httpRequest(username);
+    return GET(username);
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiGET
+ImgurAccountApi::galleryFavorites(const QString& username)
+{
+    return GET(QString("%1/gallery_favorites").arg(username));
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiGET
+ImgurAccountApi::galleryFavorites(const QString& username, const int page, const bool newestFirst)
+{
+    return GET(QString("%1/gallery_favorites/%2/%3").arg(username, QString::number(page), newestFirst ? "newest" : "oldest"));
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiGET
+ImgurAccountApi::favorites(const QString& username)
+{
+    return GET(QString("%1/favorites").arg(username));
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiGET
+ImgurAccountApi::submissions(const QString& username)
+{
+    return GET(QString("%1/submissions").arg(username));
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiGET
+ImgurAccountApi::submissions(const QString& username, const int page)
+{
+    return GET(QString("%1/submissions/%2").arg(username, QString::number(page)));
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiGET
+ImgurAccountApi::settings(const QString& username)
+{
+    return GET(QString("%1/settings").arg(username));
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiPOST
+ImgurAccountApi::setSettings(const QString& username, const ImgurAccountSettings& settings)
+{
+    Q_UNUSED(settings);
+    qCritical("[ImgurAccountApi::setSettings] CRITICAL: Unimplemented member function.");
+/*
+    QUrlQuery query;
+    query.setQueryItems(
+    {
+        {"bio","???"},
+        {"public_images","???"},
+        {"messaging_enabled","???"},
+        {"album_privacy","???"},
+        {"accepted_gallery_terms","???"},
+        {"username","???"},
+    });
+*/
+    return POST(QString("%1/settings").arg(username));
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiGET
+ImgurAccountApi::galleryProfile(const QString& username)
+{
+    return GET(QString("%1/gallery_profile").arg(username));
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiGET
+ImgurAccountApi::verifyEmail(const QString& username)
+{
+    return GET(QString("%1/verifyemail").arg(username));
+}
+/*!
+ * TODO Explain me.
+ * \brief
+ */
+ImgurApiPOST
+ImgurAccountApi::sendVerificationEmail(const QString& username)
+{
+    return POST(QString("%1/verifyemail").arg(username));
 }

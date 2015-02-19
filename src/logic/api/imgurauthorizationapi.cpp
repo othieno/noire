@@ -20,19 +20,20 @@
 #include <QUrlQuery>
 
 using noire::ImgurAuthorizationApi;
+using noire::ImgurApiPOST;
 
 /*!
  * \brief Instantiates an ImgurAuthorizationApi object with the client \a identifier.
  */
 ImgurAuthorizationApi::ImgurAuthorizationApi(const QString& identifier) :
-ImgurApiEndpoint(QString(), ImgurApiEndpoint::API_OAUTH_BASE_URL),
+ImgurApiEndpoint(QString(), API_OAUTH_BASE_URL),
 clientId_(identifier),
 authorizationHeader_(QString("Client-ID %1").arg(clientId_).toUtf8())
 {}
 /*!
  * \brief Authorizes the \a PIN code.
  */
-QNetworkReply*
+ImgurApiPOST
 ImgurAuthorizationApi::authorizePIN(const QString& PIN)
 {
     return authorize(PIN, "pin");
@@ -40,7 +41,7 @@ ImgurAuthorizationApi::authorizePIN(const QString& PIN)
 /*!
  * \brief Authorizes the refresh \a token.
  */
-QNetworkReply*
+ImgurApiPOST
 ImgurAuthorizationApi::authorizeRefreshToken(const QString& token)
 {
     return authorize(token, "refresh_token");
@@ -48,24 +49,19 @@ ImgurAuthorizationApi::authorizeRefreshToken(const QString& token)
 /*!
  * \brief Authorizes the \a key of the specified grant \a type.
  */
-QNetworkReply*
+ImgurApiPOST
 ImgurAuthorizationApi::authorize(const QString& key, const QString& type)
 {
-    QNetworkReply* reply = nullptr;
-    if (!key.isEmpty())
-    {
-        QUrlQuery query;
-        query.setQueryItems
-        ({
-            {"client_id", clientId_},
-            {"client_secret", clientSecret_},
-            {"grant_type", type},
-            {type, key},
-        });
+    QUrlQuery query;
+    query.setQueryItems
+    ({
+        {"client_id", clientId_},
+        {"client_secret", clientSecret_},
+        {"grant_type", type},
+        {type, key},
+    });
 
-        reply = POST("token", query.toString(QUrl::FullyEncoded).toUtf8());
-    }
-    return reply;
+    return POST("token", query);
 }
 /*!
  * \brief Returns the current access token.

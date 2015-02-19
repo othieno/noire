@@ -32,14 +32,14 @@ public:
         Down
     };
 
-    QNetworkReply* comment(const QString& commentId);
-    QNetworkReply* createComment(const QString& imageId, const QString& comment);
-    QNetworkReply* createComment(const QString& imageId, const QString& comment, const QString& parentId);
-    QNetworkReply* deleteComment(const QString& commentId);
-    QNetworkReply* replies(const QString& commentId);
-    QNetworkReply* reply(const QString& commentId, const QString& imageId, const QString& comment);
-    QNetworkReply* vote(const QString& commentId, const Vote& vote);
-    QNetworkReply* report(const QString& commentId);
+    ImgurApiGET    comment(const QString& commentId);
+    ImgurApiPOST   createComment(const QString& imageId, const QString& comment);
+    ImgurApiPOST   createComment(const QString& imageId, const QString& comment, const QString& parentId);
+    ImgurApiDELETE deleteComment(const QString& commentId);
+    ImgurApiGET    replies(const QString& commentId);
+    ImgurApiPOST   reply(const QString& commentId, const QString& imageId, const QString& comment);
+    ImgurApiPOST   vote(const QString& commentId, const Vote& vote);
+    ImgurApiPOST   report(const QString& commentId);
 private:
     ImgurCommentApi();
 };

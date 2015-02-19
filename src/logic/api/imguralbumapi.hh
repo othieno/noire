@@ -26,20 +26,20 @@ class ImgurAlbumApi final : public ImgurApiEndpoint
 {
     friend class ImgurApi;
 public:
-    QNetworkReply* album(const QString& albumId);
+    ImgurApiGET    album(const QString& albumId);
 
-    QNetworkReply* images(const QString& albumId);
-    QNetworkReply* image(const QString& albumId, const QString& imageId);
+    ImgurApiGET    images(const QString& albumId);
+    ImgurApiGET    image(const QString& albumId, const QString& imageId);
 
-    QNetworkReply* createAlbum(const ImgurAlbum& album);
-    QNetworkReply* updateAlbum(const QString& albumId, const ImgurAlbum& album);
-    QNetworkReply* deleteAlbum(const QString& albumId);
+    ImgurApiPOST   createAlbum(const ImgurAlbum& album);
+    ImgurApiPOST   updateAlbum(const QString& albumId, const ImgurAlbum& album);
+    ImgurApiDELETE deleteAlbum(const QString& albumId);
 
-    QNetworkReply* favorite(const QString& albumId);
+    ImgurApiPOST   favorite(const QString& albumId);
 
-    QNetworkReply* setImages(const QString& albumId, const QStringList& imageIds);
-    QNetworkReply* addImages(const QString& albumId, const QStringList& imageIds);
-    QNetworkReply* deleteImages(const QString& albumId, const QStringList& imageIds);
+    ImgurApiPOST   setImages(const QString& albumId, const QStringList& imageIds);
+    ImgurApiPUT    addImages(const QString& albumId, const QStringList& imageIds);
+    ImgurApiDELETE deleteImages(const QString& albumId, const QStringList& imageIds);
 private:
     ImgurAlbumApi();
 };
