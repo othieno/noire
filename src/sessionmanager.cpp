@@ -46,7 +46,17 @@ SessionManager::setSession(const Session& session)
         settings_.setRefreshToken(session_.refreshToken);
 }
 /*!
- * \brief Authorizes a user with the specified \a PIN code.
+ * \brief Authorizes the specified \a code.
+ */
+void
+SessionManager::authorizeCode(const QString& code)
+{
+    auto* const reply = ImgurApi::Authorization.authorizeCode(code)(networkAccessManager_);
+    if (reply != nullptr)
+        onHandleAuthorizationReply(*reply);
+}
+/*!
+ * \brief Authorizes the specified \a PIN.
  */
 void
 SessionManager::authorizePIN(const QString& PIN)

@@ -1,7 +1,8 @@
 *
 {
+/*  color:#85BF25; *//* Imgur green. */
     color:#FFF;
-    background:#222;
+    background:#121211;
 }
 
 QPushButton
@@ -19,3 +20,20 @@ QPushButton#logoutButton_:hover { border-image:url(":/icon/logout-button-hover")
 
 QPushButton#menuButton_ { border-image:url(":/icon/menu-button"); }
 QPushButton#menuButton_:hover { border-image:url(":/icon/menu-button-hover") }
+
+
+
+
+
+
+
+
+
+#AuthorizationView > #info_
+{
+	color:#666;
+	margin:0 1em;
+	padding:0.35em 0;
+	border-top:1px solid #222;
+	font:400 italic 8pt sans;
+}

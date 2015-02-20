@@ -40,6 +40,7 @@ public:
      */
     inline const Session& session() const { return session_; }
 public slots:
+    void authorizeCode(const QString& code);
     void authorizePIN(const QString& PIN);
     void authorizeRefreshToken(const QString& token);
 private:

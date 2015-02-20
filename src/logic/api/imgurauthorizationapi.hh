@@ -26,6 +26,7 @@ class ImgurAuthorizationApi final : public ImgurApiEndpoint
 {
     friend class ImgurApi;
 public:
+    ImgurApiPOST authorizeCode(const QString& code);
     ImgurApiPOST authorizePIN(const QString& PIN);
     ImgurApiPOST authorizeRefreshToken(const QString& token);
 
@@ -35,6 +36,10 @@ public:
      * \brief Returns the current authorization header.
      */
     inline const QByteArray& header() const { return authorizationHeader_; }
+    /*!
+     * \brief Returns the client identifier.
+     */
+    inline const QString& clientIdentifier() const { return clientId_; }
     /*!
      * \brief Returns the client secret.
      */

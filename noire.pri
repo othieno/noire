@@ -18,7 +18,7 @@
 #greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 3) {
 
 # Include the necessary modules.
-QT *= widgets network sql
+QT *= widgets webkitwidgets network sql
 
 # Locate and include the OpenSSL package.
 #CONFIG *= link_pkgconfig

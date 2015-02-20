@@ -22,6 +22,7 @@ INCLUDEPATH += \
     src/logic \
     src/logic/api \
     src/logic/models \
+    src/presentation/views \
     src/presentation
 
 HEADERS += \
@@ -47,7 +48,9 @@ HEADERS += \
     src/logic/api/imgurcommentapi.hh \
     src/logic/api/imgurconversationapi.hh \
     src/logic/api/imgurauthorizationapi.hh \
-    src/logic/api/imgurapirequest.hh
+    src/logic/api/imgurapirequest.hh \
+    src/presentation/views/authorizationview.hh \
+    src/presentation/views/view.hh
 
 SOURCES += \
     src/presentation/window.cpp \
@@ -71,10 +74,12 @@ SOURCES += \
     src/logic/api/imgurimageapi.cpp \
     src/logic/api/imgurmemegenapi.cpp \
     src/logic/api/imgurnotificationapi.cpp \
-    src/logic/api/imgurapirequest.cpp
+    src/logic/api/imgurapirequest.cpp \
+    src/presentation/views/authorizationview.cpp
 
 FORMS += \
-    src/presentation/forms/window.ui
+    src/presentation/forms/window.ui \
+    src/presentation/forms/authorizationview.ui
 
 RESOURCES += \
     res/res.qrc

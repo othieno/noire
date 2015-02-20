@@ -31,7 +31,15 @@ clientId_(identifier),
 authorizationHeader_(QString("Client-ID %1").arg(clientId_).toUtf8())
 {}
 /*!
- * \brief Authorizes the \a PIN code.
+ * \brief Authorizes the \a code.
+ */
+ImgurApiPOST
+ImgurAuthorizationApi::authorizeCode(const QString& code)
+{
+    return authorize(code, "code");
+}
+/*!
+ * \brief Authorizes the \a PIN.
  */
 ImgurApiPOST
 ImgurAuthorizationApi::authorizePIN(const QString& PIN)
