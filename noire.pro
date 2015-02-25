@@ -50,7 +50,10 @@ HEADERS += \
     src/logic/api/imgurauthorizationapi.hh \
     src/logic/api/imgurapirequest.hh \
     src/presentation/views/authorizationview.hh \
-    src/presentation/views/view.hh
+    src/presentation/views/view.hh \
+    src/presentation/windowmanager.hh \
+    src/presentation/titlebar.hh \
+    src/presentation/sizegrip.hh
 
 SOURCES += \
     src/presentation/window.cpp \
@@ -75,7 +78,9 @@ SOURCES += \
     src/logic/api/imgurmemegenapi.cpp \
     src/logic/api/imgurnotificationapi.cpp \
     src/logic/api/imgurapirequest.cpp \
-    src/presentation/views/authorizationview.cpp
+    src/presentation/views/authorizationview.cpp \
+    src/presentation/titlebar.cpp \
+    src/presentation/sizegrip.cpp
 
 FORMS += \
     src/presentation/forms/window.ui \
