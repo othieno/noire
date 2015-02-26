@@ -29,27 +29,18 @@ settings_(settings),
 sessionManager_(sessionManager)
 {}
 /*!
- * \brief Overrides the show event.
- * This member function builds the window's user interface the first time it's displayed.
+ * \brief Initializes the window's user interface.
  */
 void
-Window::showEvent(QShowEvent* const event)
+Window::onInitializeUi()
 {
-    // When the window is displayed for the first time, it lacks a user interface.
-    // This is where said UI gets constructed.
-    if (centralWidget() == nullptr)
-    {
-        setupUi(this);
+    // Initialize the UI for the current session.
+    onSessionChanged(sessionManager_.session());
 
-        // Initialize the UI for the current session.
-        onSessionChanged(sessionManager_.session());
+    connect(&sessionManager_, &SessionManager::sessionChanged, this, &Window::onSessionChanged);
+    connect(&sessionManager_, &SessionManager::authorizationFailed, this, &Window::onAuthorizationFailed);
 
-        connect(&sessionManager_, &SessionManager::sessionChanged, this, &Window::onSessionChanged);
-        connect(&sessionManager_, &SessionManager::authorizationFailed, this, &Window::onAuthorizationFailed);
-
-        //TODO Load the window's saved configuration before displaying it.
-    }
-    QMainWindow::showEvent(event);
+    //TODO Load the window's saved configuration before displaying it.
 }
 /*!
  * \brief Handles the SessionManager's 'sessionChanged' signal.

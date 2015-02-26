@@ -20,6 +20,7 @@
 
 #include <QMainWindow>
 #include "ui_window.h"
+#include "windowmanager.hh"
 
 namespace noire {
 
@@ -27,12 +28,12 @@ class Settings;
 class Session;
 class SessionManager;
 
-class Window final : public QMainWindow, private Ui::Window
+class Window final : public WindowManager<QMainWindow, Ui::Window>
 {
-    friend class Application;
-private:
+public:
     Window(Settings& settings, SessionManager& sessionManager);
-    void showEvent(QShowEvent* const event) override;
+private:
+    void onInitializeUi() override;
 
     Settings& settings_;
     SessionManager& sessionManager_;

@@ -18,6 +18,8 @@
 #ifndef TITLEBAR_HH
 #define TITLEBAR_HH
 
+class QWidget;
+
 namespace noire {
 
 class TitleBar

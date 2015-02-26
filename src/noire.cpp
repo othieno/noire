@@ -21,6 +21,7 @@ using noire::Application;
 
 int main(int argc, char** argv)
 {
+    // Note: These application properties must be set before a call to Application::createDataLocations.
     Application::setApplicationName("noire");
     Application::setApplicationDisplayName("Noire");
     Application::setOrganizationName(QString());
