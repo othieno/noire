@@ -15,32 +15,15 @@
  * You should have received a copy of the GNU General Public License along with Noire.
  * If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef AUTHORIZATIONVIEW_HH
-#define AUTHORIZATIONVIEW_HH
-
 #include "view.hh"
-#include "ui_authorizationview.h"
 
-namespace noire {
+using noire::View;
 
-class SessionManager;
-
-class AuthorizationView final : public View, private Ui::AuthorizationView
+/*!
+ * \brief Instantiates a View with the specified \a title and \a icon.
+ */
+View::View(const QString& title, const QIcon& icon)
 {
-    Q_OBJECT
-public:
-    explicit AuthorizationView(SessionManager& sessionManager);
-
-    void initialize() override;
-private:
-    const QUrl authorizationURL_;
-    SessionManager& sessionManager_;
-private slots:
-    void onWebViewUrlChanged(const QUrl& url);
-    void onWebViewLoadStarted();
-    void onWebViewLoadFinished(const bool ok);
-};
-
-} // namespace noire
-
-#endif // AUTHORIZATIONVIEW_HH
+    setWindowTitle(title);
+    setWindowIcon(icon);
+}

@@ -16,8 +16,10 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 #include "window.hh"
+#include "dialog.hh"
 #include "sessionmanager.hh"
 #include "application.hh"
+#include "authorizationview.hh"
 
 using noire::Window;
 
@@ -29,16 +31,17 @@ settings_(settings),
 sessionManager_(sessionManager)
 {}
 /*!
- * \brief Initializes the window's user interface.
+ * \brief Initializes the window's components.
  */
 void
-Window::onInitializeUi()
+Window::initialize()
 {
     // Initialize the UI for the current session.
     onSessionChanged(sessionManager_.session());
 
     connect(&sessionManager_, &SessionManager::sessionChanged, this, &Window::onSessionChanged);
     connect(&sessionManager_, &SessionManager::authorizationFailed, this, &Window::onAuthorizationFailed);
+    connect(authorizeButton_, &QPushButton::clicked, this, &Window::onAuthorizeButtonClicked);
 
     //TODO Load the window's saved configuration before displaying it.
 }
@@ -63,4 +66,12 @@ Window::onAuthorizationFailed(const QString& errorMessage)
 {
     qDebug() << errorMessage;
     qCritical("[Window::onAuthorizationFailed] CRITICAL: Unimplemented member function.");
+}
+/*!
+ * \brief Handles the authorizeButton_'s 'clicked' signal.
+ */
+void
+Window::onAuthorizeButtonClicked()
+{
+    Dialog(new AuthorizationView(sessionManager_), this).exec();
 }

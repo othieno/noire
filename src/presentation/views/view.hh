@@ -18,57 +18,21 @@
 #ifndef VIEW_HH
 #define VIEW_HH
 
-class QIcon;
-class QShowEvent;
+#include <QWidget>
 
 namespace noire {
 
-template<class Widget, class WidgetUi>
-class View : public Widget, protected WidgetUi
+class View : public QWidget
 {
+    Q_OBJECT
+public:
+    virtual void initialize() = 0;
 protected:
-    View(const QIcon& icon);
-
-    void showEvent(QShowEvent* const event) override;
-
-    virtual void initializeUi() = 0;
-private:
-    bool isUiInitialized_;
+    View(const QString& title, const QIcon& icon);
+signals:
+    void accept();
+    void reject();
 };
-
-/*!
- * \brief Instantiates a View object with the specified \a icon and \a parent.
- */
-template<class Widget, class _>
-View<Widget, _>::View(const QIcon& icon) :
-isUiInitialized_(false)
-{
-/*
-    // Window flags to make the widget frameless. Note that when the widget is a QDialog,
-    // an extra flag is needed to make it frameless.
-    Qt::WindowFlags framelessWindowFlags = Qt::CustomizeWindowHint |  Qt::FramelessWindowHint;
-    if (std::is_same<Widget, QDialog>::value)
-        framelessWindowFlags |= Qt::Dialog;
-
-    Widget::setWindowFlags(framelessWindowFlags);
-*/
-    Widget::setWindowIcon(icon);
-}
-/*!
- * \brief Handles the show \a event.
- * This reimplementation initializes the view's UI the first time it is displayed.
- */
-template<class Widget, class WidgetUi> void
-View<Widget, WidgetUi>::showEvent(QShowEvent* const event)
-{
-    if (!isUiInitialized_)
-    {
-        WidgetUi::setupUi(this);
-        initializeUi();
-        isUiInitialized_ = true;
-    }
-    Widget::showEvent(event);
-}
 
 } // namespace noire
 

@@ -15,32 +15,37 @@
  * You should have received a copy of the GNU General Public License along with Noire.
  * If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef AUTHORIZATIONVIEW_HH
-#define AUTHORIZATIONVIEW_HH
-
+#include "dialog.hh"
 #include "view.hh"
-#include "ui_authorizationview.h"
+#include "window.hh"
 
-namespace noire {
+using noire::Dialog;
 
-class SessionManager;
-
-class AuthorizationView final : public View, private Ui::AuthorizationView
+/*!
+ * \brief Instantiates a Dialog object with the specified \a view, and is a child of \a parent.
+ */
+Dialog::Dialog(View* const view, QWidget* const parent) :
+WindowManager(parent),
+view_(view)
 {
-    Q_OBJECT
-public:
-    explicit AuthorizationView(SessionManager& sessionManager);
-
-    void initialize() override;
-private:
-    const QUrl authorizationURL_;
-    SessionManager& sessionManager_;
-private slots:
-    void onWebViewUrlChanged(const QUrl& url);
-    void onWebViewLoadStarted();
-    void onWebViewLoadFinished(const bool ok);
-};
-
-} // namespace noire
-
-#endif // AUTHORIZATIONVIEW_HH
+    if (view_ != nullptr)
+    {
+        view_->setParent(this);
+        connect(view_, &View::accept, this, &Dialog::accept);
+        connect(view_, &View::reject, this, &Dialog::reject);
+    }
+}
+/*!
+ * \brief Initializes the Dialog's components.
+ */
+void
+Dialog::initialize()
+{
+    if (view_ != nullptr)
+    {
+        view_->initialize();
+        setWindowTitle(view_->windowTitle());
+        setWindowIcon(view_->windowIcon());
+        setContentWidget(view_);
+    }
+}

@@ -15,32 +15,27 @@
  * You should have received a copy of the GNU General Public License along with Noire.
  * If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef AUTHORIZATIONVIEW_HH
-#define AUTHORIZATIONVIEW_HH
+#ifndef DIALOG_HH
+#define DIALOG_HH
 
-#include "view.hh"
-#include "ui_authorizationview.h"
+#include <QDialog>
+#include "ui_dialog.h"
+#include "windowmanager.hh"
 
 namespace noire {
 
-class SessionManager;
+class View;
 
-class AuthorizationView final : public View, private Ui::AuthorizationView
+class Dialog final : public WindowManager<QDialog, Ui::Dialog>
 {
-    Q_OBJECT
 public:
-    explicit AuthorizationView(SessionManager& sessionManager);
-
-    void initialize() override;
+    Dialog(View* const view, QWidget* const parent = nullptr);
 private:
-    const QUrl authorizationURL_;
-    SessionManager& sessionManager_;
-private slots:
-    void onWebViewUrlChanged(const QUrl& url);
-    void onWebViewLoadStarted();
-    void onWebViewLoadFinished(const bool ok);
+    void initialize() override;
+
+    View* const view_;
 };
 
 } // namespace noire
 
-#endif // AUTHORIZATIONVIEW_HH
+#endif // DIALOG_HH

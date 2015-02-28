@@ -33,13 +33,14 @@ class Window final : public WindowManager<QMainWindow, Ui::Window>
 public:
     Window(Settings& settings, SessionManager& sessionManager);
 private:
-    void onInitializeUi() override;
+    void initialize() override;
 
     Settings& settings_;
     SessionManager& sessionManager_;
 private slots:
     void onSessionChanged(const Session& session);
     void onAuthorizationFailed(const QString& errorMessage);
+    void onAuthorizeButtonClicked();
 };
 
 } // namespace noire

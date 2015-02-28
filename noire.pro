@@ -53,7 +53,8 @@ HEADERS += \
     src/presentation/views/view.hh \
     src/presentation/windowmanager.hh \
     src/presentation/titlebar.hh \
-    src/presentation/sizegrip.hh
+    src/presentation/sizegrip.hh \
+    src/presentation/dialog.hh
 
 SOURCES += \
     src/presentation/window.cpp \
@@ -80,10 +81,13 @@ SOURCES += \
     src/logic/api/imgurapirequest.cpp \
     src/presentation/views/authorizationview.cpp \
     src/presentation/titlebar.cpp \
-    src/presentation/sizegrip.cpp
+    src/presentation/sizegrip.cpp \
+    src/presentation/dialog.cpp \
+    src/presentation/views/view.cpp
 
 FORMS += \
     src/presentation/forms/window.ui \
+    src/presentation/forms/dialog.ui \
     src/presentation/forms/authorizationview.ui
 
 RESOURCES += \

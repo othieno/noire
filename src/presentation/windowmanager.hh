@@ -32,13 +32,17 @@ class WindowManager : public Window, protected WindowUi
 {
     static_assert(std::is_base_of<QWidget, Window>::value, "Window must inherit from QWidget.");
 protected:
-    WindowManager();
+    explicit WindowManager(QWidget* const parent = nullptr);
     void showEvent(QShowEvent* const event) final override;
+
+    void setHeaderWidget(QWidget* const widget);
+    void setContentWidget(QWidget* const widget);
+    void setFooterWidget(QWidget* const widget);
     /*!
-     * \brief Initializes the window's user interface.
+     * \brief Initializes the window's components.
      * This member function is called only once: when the window is shown for the first time.
      */
-    virtual void onInitializeUi() = 0;
+    virtual void initialize() = 0;
 private:
     /*!
      * \brief The window's title bar.
@@ -55,12 +59,23 @@ private:
 };
 
 /*!
- * \brief Instantiates a WindowManager object.
+ * \brief Instantiates a WindowManager object that is a child of \a parent.
  */
-template<class _, class __>
-WindowManager<_, __>::WindowManager() :
+template<class Window, class _>
+WindowManager<Window, _>::WindowManager(QWidget* const parent) :
+Window(parent),
 isWindowInitialized_(false)
-{}
+{
+#ifdef TODO
+    // Flags to make the window frameless so we can implement a custom window frame.
+    // Note that when the window is a QDialog, an extra flag is needed to make it frameless.
+    Qt::WindowFlags framelessWindowFlags = Qt::CustomizeWindowHint |  Qt::FramelessWindowHint;
+    if (std::is_same<Window, QDialog>::value)
+        framelessWindowFlags |= Qt::Dialog;
+
+    Window::setWindowFlags(framelessWindowFlags);
+#endif
+}
 /*!
  * Handles the show \a event.
  * This override initializes the window's components the first time it's displayed.
@@ -71,11 +86,38 @@ WindowManager<Window, WindowUi>::showEvent(QShowEvent* const event)
     if (!isWindowInitialized_)
     {
         WindowUi::setupUi(this);
-        onInitializeUi();
+        initialize();
 
         isWindowInitialized_ = true;
     }
     Window::showEvent(event);
+}
+/*!
+ * Sets the header \a widget.
+ */
+template<class _, class WindowUi> void
+WindowManager<_, WindowUi>::setHeaderWidget(QWidget* const widget)
+{
+    if (widget != nullptr && WindowUi::header_ != nullptr)
+        WindowUi::header_->addWidget(widget);
+}
+/*!
+ * Sets the content \a widget.
+ */
+template<class _, class WindowUi> void
+WindowManager<_, WindowUi>::setContentWidget(QWidget* const widget)
+{
+    if (widget != nullptr && WindowUi::content_ != nullptr)
+        WindowUi::content_->addWidget(widget);
+}
+/*!
+ * Sets the footer \a widget.
+ */
+template<class _, class WindowUi> void
+WindowManager<_, WindowUi>::setFooterWidget(QWidget* const widget)
+{
+    if (widget != nullptr && WindowUi::footer_ != nullptr)
+        WindowUi::footer_->addWidget(widget);
 }
 
 } // namespace noire

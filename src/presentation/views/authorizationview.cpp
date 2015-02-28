@@ -25,22 +25,25 @@ using noire::AuthorizationView;
  * \brief Instantiates an AuthorizationView object.
  */
 AuthorizationView::AuthorizationView(SessionManager& sessionManager) :
-View(QIcon()), //TODO Change to an appropriate icon.
+View(tr("Authorization"), QIcon()), //TODO Change to an appropriate icon.
 authorizationURL_(QString("%1/authorize?client_id=%2&response_type=code").arg(ImgurApi::Authorization.baseURL, ImgurApi::Authorization.clientIdentifier())),
 sessionManager_(sessionManager)
 {}
 /*!
- * \brief Initializes the view's user interface.
+ * \brief Initializes the view's components.
  */
 void
-AuthorizationView::initializeUi()
+AuthorizationView::initialize()
 {
+    setupUi(this);
     if (webView_ != nullptr && info_ != nullptr)
     {
         connect(webView_, &QWebView::urlChanged,  this, &AuthorizationView::onWebViewUrlChanged);
-        webView_->load(authorizationURL_);
+        connect(webView_, &QWebView::loadStarted, this, &AuthorizationView::onWebViewLoadStarted);
+        connect(webView_, &QWebView::loadFinished, this, &AuthorizationView::onWebViewLoadFinished);
 
-        info_->setText(tr("Disclaimer: Noire does not store your username, email or password."));
+        webView_->load(authorizationURL_);
+        info_->setText(tr("Disclaimer: Noire does not store your email or password."));
     }
 }
 /*!
@@ -55,11 +58,11 @@ AuthorizationView::onWebViewUrlChanged(const QUrl& url)
 
         const auto& urlString = url.toString();
         if (urlString == "https://imgur.com/?error=access_denied")
-            reject();
+            emit reject();
         else if (!urlString.left(urlString.indexOf('=') + 1).compare("https://imgur.com/?code="))
         {
             sessionManager_.authorizeCode(urlString.right(urlString.length() - (urlString.indexOf('=') + 1)));
-            accept();
+            emit accept();
         }
         else
         {
@@ -71,4 +74,27 @@ AuthorizationView::onWebViewUrlChanged(const QUrl& url)
             webView_->back();
         }
     }
+}
+/*!
+ * \brief Handles the 'loadStarted' signal emitted by the web view.
+ */
+void
+AuthorizationView::onWebViewLoadStarted()
+{
+//    info_->setText(tr("Loading the Imgur authorization page ..."));
+}
+/*!
+ * \brief Handles the 'loadFinished' signal emitted by the web view.
+ */
+void
+AuthorizationView::onWebViewLoadFinished(const bool ok)
+{
+    Q_UNUSED(ok);
+/*
+    const auto& status = ok ?
+                         tr("Disclaimer: Noire does not store your email or password.") :
+                         tr("Error: Could not load the Imgur authorization page. Please try again later.");
+
+    info_->setText(status);
+*/
 }
