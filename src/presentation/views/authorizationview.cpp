@@ -26,7 +26,7 @@ using noire::AuthorizationView;
  */
 AuthorizationView::AuthorizationView(SessionManager& sessionManager) :
 View(tr("Authorization"), QIcon()), //TODO Change to an appropriate icon.
-authorizationURL_(QString("%1/authorize?client_id=%2&response_type=code").arg(ImgurApi::Authorization.baseURL, ImgurApi::Authorization.clientIdentifier())),
+authorizationURL_(QString("%1/authorize?client_id=%2&response_type=pin").arg(ImgurApi::Authorization.baseURL, ImgurApi::Authorization.clientIdentifier())),
 sessionManager_(sessionManager)
 {}
 /*!
@@ -57,11 +57,14 @@ AuthorizationView::onWebViewUrlChanged(const QUrl& url)
         webView_->stop();
 
         const auto& urlString = url.toString();
+        const auto& pinIndex  = urlString.indexOf('=') + 1;
+        const auto& pinLength = urlString.length() - pinIndex;
+
         if (urlString == "https://imgur.com/?error=access_denied")
             emit reject();
-        else if (!urlString.left(urlString.indexOf('=') + 1).compare("https://imgur.com/?code="))
+        else if (!urlString.left(pinIndex).compare("https://api.imgur.com/oauth2/pin?pin="))
         {
-            sessionManager_.authorizeCode(urlString.right(urlString.length() - (urlString.indexOf('=') + 1)));
+            sessionManager_.authorizePIN(urlString.right(pinLength));
             emit accept();
         }
         else
